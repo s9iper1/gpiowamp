@@ -1,0 +1,16 @@
+#!/usr/bin/env python3
+
+import txaio
+
+from backend import Component
+
+txaio.use_asyncio()
+from os import environ
+from autobahn.asyncio.wamp import ApplicationRunner
+
+if __name__ == '__main__':
+    runner = ApplicationRunner(
+        environ.get("AUTOBAHN_DEMO_ROUTER", "ws://localhost:8080/ws"),
+        "realm1",
+    )
+    runner.run(Component)

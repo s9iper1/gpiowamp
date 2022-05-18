@@ -1,0 +1,29 @@
+name: gpiowamp # you probably want to 'snapcraft register <name>'
+base: core20 # the base snap is the execution environment for this snap
+version: '1.0'
+summary: controlling gpio pins over wamp (crossbar) # 79 char long summary
+description: This is a simple utility to control gpio pin over wamp
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: devmode # use 'strict' once you have the right plugs and slots
+
+architectures:
+  - build-on: arm64
+    run-on: arm64
+
+  - build-on: amd64
+    run-on: amd64
+
+
+parts:
+  gpiowamp:
+    # See 'snapcraft plugins'
+    plugin: python
+    source-type: git
+    source: .
+    requirements:
+      - requirements.txt
+
+apps:
+  gpiowamp:
+    command: bin/gpiowamp
